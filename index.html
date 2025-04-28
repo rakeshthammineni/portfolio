@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<script>
+function toggleCertificatePdf(certificateId) {
+    const pdfSection = document.getElementById(certificateId);
+    const button = document.querySelector(`#${certificateId}-button`);
+
+    if (pdfSection.style.display === 'none' || pdfSection.style.display === '') {
+        pdfSection.style.display = 'block';
+        button.textContent = 'Hide Certificate';
+    } else {
+        pdfSection.style.display = 'none';
+        button.textContent = 'Show Certificate';
+    }
+}
+
+function toggleCertificateImage(certificateId) {
+    const imageSection = document.getElementById(certificateId);
+    const button = document.querySelector(`#${certificateId}-button`);
+
+    if (imageSection.style.display === 'none' || imageSection.style.display === '') {
+        imageSection.style.display = 'block';
+        button.textContent = 'Hide Certificate';
+    } else {
+        imageSection.style.display = 'none';
+        button.textContent = 'Show Certificate';
+    }
+}
+
+
+    function startSlideshows() {
+        const allSlideshows = document.querySelectorAll('.slideshow-container');
+
+        allSlideshows.forEach(slideshow => {
+            let slides = slideshow.querySelectorAll('.slide');
+            let prevBtn = slideshow.querySelector('.prev');
+            let nextBtn = slideshow.querySelector('.next');
+            let index = 0;
+            let interval;
+
+            function showSlide(n) {
+                slides.forEach(slide => slide.style.display = 'none');
+                slides[n].style.display = 'block';
+                slides[n].classList.add("fade");
+            }
+
+            function nextSlide() {
+                index = (index + 1) % slides.length;
+                showSlide(index);
+            }
+
+            function prevSlide() {
+                index = (index - 1 + slides.length) % slides.length;
+                showSlide(index);
+            }
+
+            function startAutoSlide() {
+                interval = setInterval(nextSlide, 3000);
+            }
+
+            function stopAutoSlide() {
+                clearInterval(interval);
+                startAutoSlide();
+            }
+
+            nextBtn.addEventListener('click', () => {
+                nextSlide();
+                stopAutoSlide();
+            });
+
+            prevBtn.addEventListener('click', () => {
+                prevSlide();
+                stopAutoSlide();
+            });
+
+            showSlide(index);
+            startAutoSlide();
+        });
+    }
+
+    window.onload = startSlideshows;
+</script>
+
+<body>
+
+<!-- Navbar -->
+<nav class="navbar">
+    <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#training">Training</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+</nav>
+
+<!-- Home Section -->
+<section id="home" class="home">
+    <div class="intro">
+        <div class="profile-img">
+            <img src="images/me.jpg" alt="Your Name">
+        </div>
+        <h1>Hi, I'm Rakesh Thammineni</h1>
+        <p>I'm a passionate web developer focused on building interactive and responsive websites. Here's my Portfolio!</p>
+        <a href="images/PES319_CV Rakesh CA 2.pdf" id="downloadLink" class="btn" download="FINAL.pdf">My Resume</a>
+
+    </div>
+</section>
+
+<!-- About Me Section -->
+<section id="about" class="about">
+    <h2>About Me</h2>
+    <p class="text1">Hello! I'm a passionate web developer with a deep interest in building interactive and responsive websites. I'm keen to learn and adapt to new technologies, and I love solving complex problems through coding with language C++. Beyond coding, I enjoy the creative side of web design, ensuring that my projects are not only functional but also visually appealing and user-friendly.</p>
+    <br><br>
+    <div class="skills">
+        <h2>Skills</h2>
+        <div class="skills-container">
+            <div class="skill-card">
+                <img src="images/html.png" alt="HTML & CSS">
+                <p>HTML and CSS</p>
+            </div>
+            <div class="skill-card">
+                <img src="images/javascript.png"JavaScript">
+                <p>JavaScript</p>
+            </div>
+            <div class="skill-card">
+                <img src="images/react.png" alt="React">
+                <p>React</p>
+            </div>
+            <div class="skill-card">
+                <img src="images/laravel.png" alt="Laravel">
+                <p>Laravel</p>
+            </div>
+            <div class="skill-card">
+                <img src="images/php.png" alt="PHP">
+                <p>PHP</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Certifications Section -->
+    <div class="certificates">
+        <h3>Certifications</h3>
+        
+        <!-- Certificate 1 -->
+        <div class="certificate">
+            <p>Geeks for Geeks - Data structures and algorithms</p>
+            <button id="certificate1-button" style="margin-top: 20px;" onclick="toggleCertificatePdf('certificate1-pdf')">Show Certificate</button>
+            <div id="certificate1-pdf" style="display: none; margin-top: 20px;">
+                <img src="images/GFG Summer Training Certificate.jpg" width="100%" height="600px" alt="DSA with Python Certificate">
+            </div>
+        </div>
+
+        <!-- Certificate 2 -->
+        <div class="certificate" style="margin-top: 30px;">
+            <p>HackerRank- Python</p>
+            <button id="certificate2-button" style="margin-top: 20px;" onclick="toggleCertificateImage('certificate2-image')">Show Certificate</button>
+            <div id="certificate2-image" style="display: none; margin-top: 20px;">
+                <img src="images/Hacker Rank Certificate.png" width="100%" height="600px" alt="DSA with Python Certificate">
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Projects Section -->
+<section id="projects" class="projects">
+    <h2>Projects</h2>
+
+    <div class="project-card">
+        <h2>Kanigiri Supermarket</h2>
+        <div class="slideshow-container">
+            <img class="slide" src="images/supermarket1.jpg" alt="Kanigiri Supermarket Screenshot 1">
+            <img class="slide" src="images/supermarket2.jpg" alt="Kanigiri Supermarket Screenshot 2">
+            <img class="slide" src="images/supermarket3.jpg" alt="Kanigiri Supermarket Screenshot 2">
+            <button class="prev">❮ Prev</button>
+            <button class="next">Next ❯</button>
+        </div>
+        <p class="text1">Developed an E-Commerce platform where customers can conveniently order groceries online with a seamless user experience through a component-based architecture.<br> <b>Tech Used:</b> HTML, CSS, JavaScript, PHP, React</p>
+        <a href="https://github.com/Hanish01/kanigiri-supermarket.git" class="github-button" target="_blank">View on GitHub</a>
+    </div>
+
+    <div class="project-card">
+        <h2>College Calorie Cookbook</h2>
+        <div class="slideshow-container">
+            <img class="slide" src="images/ccc1.png" alt="College Cookbook Screenshot 1">
+            <img class="slide" src="images/ccc2.png" alt="College Cookbook Screenshot 2">
+         
+            <button class="prev">❮ Prev</button>
+            <button class="next">Next ❯</button>
+        </div>
+        <p>Designed a Recipe Sharing platform for hostel students to find meals with available ingredients, powered by a dynamic database-driven backend.<br><b>Tech Used:</b> HTML, CSS, JavaScript, Node.js, PostgreSQL</p>
+        <a href="https://github.com/Hanish01/College-cookbook" class="github-button" target="_blank">View on GitHub</a>
+    </div>
+
+    
+</section>
+
+<section id="training" class="training">
+    <h2>Training</h2>
+    <h3>Geeks for Geeks - DSA</h3>
+    <p class="text1">                                 
+        ◦ Completed a Data Structures and Algorithms (DSA) course from GFG. The course covered fundamentals and advanced concepts. <br><br>
+        ◦ Skills: Python, Data structures, and Algorithms
+    </p>
+
+    <div class="certificate" style="margin-top: 30px;">
+        <button id="training-certificate-button" style="margin-top: 20px;" onclick="toggleCertificateImage('training-certificate-image')">Show Certificate</button>
+        <div id="training-certificate-image" style="display: none; margin-top: 20px;">
+            <img src="images/GFG Summer Training Certificate.jpg" width="80%" height="600px" alt="Training Certificate">
+        </div>
+    </div>
+</section>
+
+<section class="contact">
+    <h2>Contact Us</h2>
+    <p>Feel free to reach out for any questions or feedback.</p>
+    <form action="submit_form.php" method="POST" class="contact-form">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
+        <button type="submit">Send Message</button>
+    </form>
+</section>
+
+</body>
+</html>
